@@ -22,7 +22,7 @@ Through their journey, a Pokemon trainer can only have 6 Pokemon on their team.
 As you build, the eventual goal of a fully functional Pokemon team
 organizer where we can add and remove Pokemon as needed:
 
-![Showing Finished Project Example](/pokemon-teams-frontend/assets/pokemon_teams.gif)
+![completed example](https://curriculum-content.s3.amazonaws.com/module-3/pokemon_teams_completed.gif)
 
 Although we have not explicitly gone over some of the CRUD actions involved in
 adding and deleting relationships in this section of content, refer back to what
@@ -98,7 +98,7 @@ rails g resource trainer name
 rails g resource pokemon species nickname trainer:references
 ```
 
-Run `rails db:migrate` to execute our migration files, and create database and schema. Using
+Run `rails db:migrate` to create a schema, models, and controllers. Using
 `trainer:references` will set up `belongs_to :trainer` in the `Pokemon` model,
 though it won't update the other side of the relationship. You will need to add
 the `has_many :pokemons` in the `Trainer` model yourself.
@@ -148,29 +148,6 @@ have populated your tables with seed data.
 
 Some basic structure is provided in the folder `pokemon-teams-frontend`, including
 an HTML, CSS and JS file set up to work together.
-
-## Running the Server
-
-The API server should be started by accessing the folder pokemon-teams-backend (`cd pokemon-teams-backend`) and running `rails s` from a terminal window. It should run on port :3000 since the `pokemon-teams-frontend/src/index.js` file has a constant `BASE_URL` setup to use that port.
-
-If for any reason you had to quit the running server and have to restart it, you might see an error saying **port 3000 already in use**. In this case, do the following:
-
-Run `lsof -i :3000` to inspect what's running on port 3000 (alternatively, you can try `ps aux | grep 3000`).
-You will see something like the following:
-```
-COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME 
-ruby 9639 matteo 28u IPv4 0x89939df84558ba7 0t0 TCP localhost:hbci (LISTEN) 
-ruby 9639 matteo 29u IPv6 0x89939dfa2ef1897 0t0 TCP localhost:hbci (LISTEN)
-```
-
-Kill the process running by doing `kill -9 <PID_HERE>`, so in the case of my example `kill -9 9639`.
-Now the `rails s` command should start the server on port 3000 without issues.
-
-> **Aside**: In general, you can always specify what port to use when running the server, by running: `rails s -p PORT_NUMBER` (eg: `rails s -p 3001`).
-
-The frontend should be started by accessing the folder pokemon-teams-frontend (`cd pokemon-teams-frontend`) and, in a new terminal window, run `open index.html` or simply right-click on the file name and select `open in browser` if this option is available.
-
-**Keep the rails server running since our frontend will fire requests to our backend API in order to retrieve the existing Trainers and Pokemons, as well as performing other actions like creating and deleting Pokemons.**
 
 ### Suggested HTML
 
