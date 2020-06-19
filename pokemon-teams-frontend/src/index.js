@@ -13,10 +13,10 @@ fetch(TRAINERS_URL)
     trainers["data"].forEach(trainer => {
       let trainerCard = `
         <div class="card" data-id="${trainer.id}">
-          <p>${trainer.attributes.name}
+          <p>${trainer.attributes.name}</p> 
             <button data-trainer-id="${trainer.id}">Add Poke</button>
             <ul id="trainerUl-${trainer.id}"></ul>
-          </p> 
+          
           </div>
           `
       pokeMain.insertAdjacentHTML('beforeend', trainerCard)
@@ -57,10 +57,11 @@ function delPoke(POKEMONS_URL, pokemonId) {
     body: JSON.stringify(pokeTrnIdData)
   };
 
-  return fetch("http://localhost:3000/pokemons", `${configObj}`)
+  return fetch(POKEMONS_URL)
 
     .then(resp => resp.json())
     .then(pokemons => {
+      console.log('whatisthis', pokemons)
       pokemons[pokemonId].trainer_id
       pokeliDel.setAttribute("pokemons[pokemonId].trainer_id", "");
       let pokeLiDel = document.getElementById(`trainerUl-${pokemon.trainer_id}`)
